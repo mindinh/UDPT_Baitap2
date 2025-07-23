@@ -1,0 +1,36 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  background-color: rgb(244, 244, 244);
+  flex: 1;
+  padding: 20px;
+}
+
+.paper-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+.paper-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.paper-card h4 {
+  margin: 0 0 6px;
+  color: #333;
+}
+
+.paper-item:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
