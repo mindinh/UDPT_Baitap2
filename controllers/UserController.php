@@ -35,9 +35,9 @@ class UserController {
             $profileJson = $user['profile_json_text'];
             $profileData = json_decode($profileJson, true);
             $user['bio'] = $profileData['bio'] ?? '';
-            $user['interests'] = $profileData['interests'] ?? '';
-            $user['education'] = $profileData['education'] ?? '';
-            $user['work_experience'] = $profileData['work_experience'] ?? '';
+            $user['interests'] = $profileData['interests'] ?? [];
+            $user['education'] = $profileData['education'] ?? [];
+            $user['work_experience'] = $profileData['work_experience'] ?? [];
 
    
             require_once 'views/profile_update.php';
@@ -49,6 +49,7 @@ class UserController {
 
         $website = $_POST['website'] ?? '';
         $bio = $_POST['bio'] ?? '';
+        $avatarPath = '';
         $interests = array_map('trim', explode(',', $_POST['interests'] ?? ''));
         $education = array_filter(array_map('trim', explode("\n", $_POST['education'] ?? '')));
         $workExp = array_filter(array_map('trim', explode("\n", $_POST['work_exp'] ?? '')));
@@ -62,9 +63,16 @@ class UserController {
 
         $profileJson = json_encode($profileData, JSON_UNESCAPED_UNICODE);
         
-        echo "Profile JSON: " . $profileJson; // Debugging line
-        $boolean = $this->userModel->updateProfile($userId, $profileJson);
-        if ($boolean) {
+        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+            $avatar = $_FILES['avatar'];
+
+            $path = '/images/' . $userId . '.png';
+            move_uploaded_file($avatar['tmp_name'], "public" . $path);
+            $avatarPath = $path;
+        }
+
+        $isSuccess = $this->userModel->updateProfile($userId, $profileJson, $avatarPath);
+        if ($isSuccess) {
             header("Location: ?action=profile");
             exit();
         }

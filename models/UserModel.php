@@ -72,10 +72,10 @@ class UserModel {
         return null;
     }
 
-    public function updateProfile($userId, $profileJson) {
-        $query = "UPDATE authors SET profile_json_text = ? WHERE user_id = ?";
+    public function updateProfile($userId, $profileJson, $avatarPath) {
+        $query = "UPDATE authors SET profile_json_text = ?, image_path = ? WHERE user_id = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("si", $profileJson, $userId);
+        $stmt->bind_param("ssi", $profileJson, $avatarPath, $userId);
         if ($stmt->execute()) {
             $stmt->close();
             return true;

@@ -21,18 +21,18 @@ $title = "Profile Update";
   </div>
 
   <div class="mb-3">
-    <label for="education" class="form-label">Education (Enter for a new entry)</label>
+    <label for="education" class="form-label">Education (Enter new line for a new entry)</label>
     <textarea name="education" class="form-control"><?= htmlspecialchars(implode("\n", $user["education"])) ?></textarea>
   </div>
 
   <div class="mb-3">
-    <label for="work_exp" class="form-label">Work Experience (Enter for a new entry)</label>
+    <label for="work_exp" class="form-label">Work Experience (Enter new line for a new entry)</label>
     <textarea name="work_exp" class="form-control"><?= htmlspecialchars(implode("\n", $user["work_experience"])) ?></textarea>
   </div>
 
   <div class="mb-3">
     <label for="avatar">Avatar</label>
-    <input type="file" name="avatar" class="form-control" accept="image/*" />
+    <input type="file" name="avatar" class="form-control" accept="image/png" />
   </div>
 
   <button type="submit" class="btn btn-primary">Cập nhật</button>

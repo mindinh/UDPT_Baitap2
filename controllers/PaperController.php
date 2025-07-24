@@ -98,7 +98,7 @@ class PaperController
     public function showSearchPage()
     {
         $topics = $this->topicModel->getAllTopics();
-        $authors = $this->authorModel->getAllOtherAuthors($_SESSION['userId']); 
+        $authors = $this->userModel->getAllAuthors(); 
         $conferences = $this->conferenceModel->getAllConferences();
         $conferencesAbbrev = $conferences ? array_map(function($conf) {
             return $conf['abbreviation'];
@@ -163,7 +163,7 @@ class PaperController
 
     public function showAddPaperForm()
     {
-        $authors = $this->userModel->getAllAuthors();
+        $authors = $this->authorModel->getAllOtherAuthors($_SESSION['userId']);
         $topics = $this->topicModel->getAllTopics();
         $conferences = $this->conferenceModel->getAllConferences();
 

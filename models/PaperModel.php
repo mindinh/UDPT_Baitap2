@@ -115,9 +115,9 @@ class PaperModel {
         }
 
         if (!empty($criteria['conference'])) {
-            $sql .= " AND c.name = ?";
+            $sql .= " AND c.conference_id = ?";
             $params[] = $criteria['conference'];
-            $types .= 's';
+            $types .= 'i';
         }
         
 
